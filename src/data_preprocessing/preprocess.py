@@ -45,5 +45,5 @@ def preprocess_csv(file_path, output_path):
 	df["Réponse écrite de DP"] = df["Réponse écrite de DP"].fillna("")
 	df["Réponse écrite de DP"] = df["Réponse écrite de DP"].apply(clean_text)
 	
-	df.to_csv(output_path, index=False)
+	df.head(10).to_csv(output_path, index=False)
 	print(f"Preprocessed data saved to {output_path}")
