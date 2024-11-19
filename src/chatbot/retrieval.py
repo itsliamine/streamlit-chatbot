@@ -5,7 +5,7 @@ from langchain.chains import LLMChain
 from langchain.chains import RetrievalQA
 from src.pinecone.init import pinecone_init
 from langchain.vectorstores import Pinecone
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 def retrieve():
 	pc = pinecone_init()
