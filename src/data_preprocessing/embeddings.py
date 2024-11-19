@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from src.pinecone.init import create_db
 from src.pinecone.upsert import upsert_vectors
 
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
