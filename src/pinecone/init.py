@@ -6,12 +6,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def pinecone_init():
+def pinecone_init(index_name):
 	pc = Pinecone(os.getenv("PINECONE_API_KEY"))
-	return pc
+	index = pc.Index(index_name)
+	return index
 
 def create_db(index_name, dimension):
-	pc = pinecone_init()
+	pc = Pinecone(os.getenv("PINECONE_API_KEY"))
 	if index_name not in pc.list_indexes().names():
 		pc.create_index(
 			index_name,
