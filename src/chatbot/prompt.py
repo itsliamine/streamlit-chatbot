@@ -1,7 +1,7 @@
 from langchain_core.prompts import PromptTemplate
 
-prompt_template = PromptTemplate(
-    input_variables=["context", "question"],
+initial_prompt = PromptTemplate(
+    input_variables=["question", "context_str", "conversation_history"],
     template="""
 		Vous êtes un chatbot conçu pour fournir des informations précises et fiables sur les droits juridiques des personnes en France et dans d'autres pays francophones.
 
@@ -15,8 +15,10 @@ prompt_template = PromptTemplate(
 	'Comment puis-je demander l’Allocation aux Adultes Handicapés (AAH) ?'
 	'Un propriétaire peut-il me refuser un logement à cause de mon handicap ?'
 	Soyez poli, respectueux et complet dans vos réponses.
-	Contexte: {context}
+ 
 	Question: {question}
+	Contexte: {context_str}
+	Historique de conversation {conversation_history}
 	Réponse:
 	""",
 )

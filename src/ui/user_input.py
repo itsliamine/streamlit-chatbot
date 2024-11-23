@@ -8,7 +8,7 @@ def handle_user_input():
 
 		with st.spinner('Recherche de la réponse...'):
 			response = st.session_state.qa_chain.invoke({
-				"query": user_input
+				"question": user_input
 			})
 
 			answer = response.get(
