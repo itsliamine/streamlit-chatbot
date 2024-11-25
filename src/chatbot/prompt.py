@@ -18,5 +18,5 @@ prompt_template = PromptTemplate(
 	Contexte: {context}
 	Question: {question}
 	Réponse:
-	"""
+	""",
 )
