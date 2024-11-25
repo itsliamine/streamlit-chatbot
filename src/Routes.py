@@ -1,8 +1,7 @@
-from flask import jsonify, render_template, request
+from flask import jsonify, request
 from flask_cors import CORS
 
 from src.chatbot.retrieval import retrieve
-from src.data_preprocessing.embeddings import generate_embeddings, upload_embeddings
 
 from . import create_app
 
