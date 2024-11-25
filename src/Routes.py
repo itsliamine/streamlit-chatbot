@@ -1,12 +1,16 @@
-import flask
-from flask import jsonify, request
+from flask import jsonify, render_template, request
 from flask_cors import CORS
-from src.data_preprocessing.preprocess import preprocess_csv
+
+from src.chatbot.retrieval import retrieve
 from src.data_preprocessing.embeddings import generate_embeddings, upload_embeddings
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+from . import create_app
+
+app = create_app()
 CORS(app)
+
+# Appel de la fonction pour utiliser l'ia
+qa_chain = retrieve()
 
 
 # Route pour le futur front de la page de droit Pluriel
@@ -21,17 +25,15 @@ def traiter_donnees():
 
     # Récupérer la valeur de l'input
     valeur_input = data["input"]
-    embeds = generate_embeddings("../DB 2.csv")
-    upload_embeddings(
-		embeddings=embeds
-	)
-    # Ici, vous pouvez faire votre traitement personnalisé
-    # Par exemple, transformer la valeur, faire un calcul, etc.
-    resultat = valeur_input
+
+    # Générer les embeddings
+    response = qa_chain.invoke({"query": valeur_input})
+    resultat = response.get(
+        "result", "Désolé, je ne peux pas répondre à cette question."
+    )
 
     # Renvoyer le résultat
     return jsonify({"input_original": valeur_input, "resultat_traite": resultat})
 
 
-app.run()
-
+app.run(debug=True)
