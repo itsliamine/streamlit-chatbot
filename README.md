@@ -49,3 +49,13 @@ Provide a fully fonctionnal Web Application that can be shown and deployed.
 <br>
 
 The Web Application main's focus is Accessibility. It should be able to provide solutions to people facing issues when it comes to using it.
+
+
+
+
+
+
+
+
+
+Réponses courtes et précises.
