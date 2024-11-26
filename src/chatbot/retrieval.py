@@ -1,5 +1,5 @@
 import os
-from src.chatbot.prompt import initial_prompt
+from src.chatbot.prompt import initial_prompt, CONDENSE_QUESTION_PROMPT
 
 from langchain.memory import ConversationBufferMemory
 

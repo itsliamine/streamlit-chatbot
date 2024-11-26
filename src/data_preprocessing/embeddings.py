@@ -68,3 +68,18 @@ def upload_embeddings(embeddings):
 		index_name=index_name,
 		embeddings=embeddings
 	)
+ 
+ 
+def upload_embeddings_step(embeds):
+	temp = []
+	i = 0
+	for embed in tqdm(embeds, 'Upload embeds'):
+		if i != 10:
+			temp.append(embed)
+			i += 1
+		else:
+			upload_embeddings(
+				temp
+			)
+			temp = []
+			i = 0

@@ -71,9 +71,20 @@ def preprocess_csv(
 		
 		logging.info("Tokenzing answers...")
 		df["answers_tokens"] = df["answers"].apply(tokenize_text)
-
 		df.to_csv(output_path, index=False)
 		print(f"Preprocessed data saved to {output_path}")
 
 	except Exception as e:
 		logging.error(f"An error occurred: {str(e)}")
+
+
+def clean_text(text: str) -> str:
+	if text == "":
+		return ""
+
+	text = re.sub(r"[^a-zA-Z0-9\sÀ-ÖØ-öø-ÿ]", "", text)
+	text = re.sub(r'[^\w\s.,?!-]', '', text)
+	text = re.sub(r"\s+", " ", text).strip()
+	return text.lower()
+
+		
