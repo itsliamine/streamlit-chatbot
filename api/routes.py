@@ -37,7 +37,7 @@ def init_routes(app):
 		
 		# Erreur
 		resultat = response.get(
-			"result", "Désolé, je ne peux pas répondre à cette question."
+			"answer", "Désolé, je ne peux pas répondre à cette question."
 		)
 
 		# Retourne le resultat
