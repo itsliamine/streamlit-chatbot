@@ -1,10 +1,10 @@
 import os
-from src.chatbot.prompt import initial_prompt, refine_prompt
+from src.chatbot.prompt import initial_prompt
 
 from langchain.memory import ConversationBufferMemory
 
 from langchain_community.llms import AzureOpenAI
-from langchain.chains import RetrievalQAWithSourcesChain
+from langchain.chains import ConversationalRetrievalChain, LLMChain
 from src.pinecone.init import pinecone_init
 from langchain_pinecone import Pinecone
 from langchain_openai import AzureOpenAIEmbeddings, AzureChatOpenAI
@@ -50,11 +50,10 @@ def retrieve():
 			max_retries=3,
 			request_timeout=30
 		)
+
 	except Exception as e:
 		logging.error(f"Failed to initialize LLM: {str(e)}")
 		raise
-
-	compressor = LLMChainExtractor.from_llm(llm)
 
 	retriever = vector_store.as_retriever(
 		search_kwargs={
@@ -62,28 +61,23 @@ def retrieve():
 		}
 	)
 
-	compression_retriever = ContextualCompressionRetriever(
-		base_compressor=compressor,
-		base_retriever=retriever
-	)
-
 	memory = ConversationBufferMemory(
 		memory_key="chat_history",
 		input_key="question",
 		output_key="answer",
-		return_messages=True
+		return_messages=True,
+		human_prefix="User",
+		ai_prefix="Assistant"
 	)
 
-	qa = RetrievalQAWithSourcesChain.from_chain_type(
+
+	qa = ConversationalRetrievalChain.from_llm(
 		llm=llm,
-		chain_type="stuff",
-		retriever=compression_retriever,
-		chain_type_kwargs={
-			"question_prompt": initial_prompt,
-			"memory": memory,
-			"document_variable_name": "context_str",
-		},
-		return_source_documents=True
+		retriever=retriever,
+		memory=memory,
+		combine_docs_chain_kwargs={
+			'prompt': initial_prompt
+		}
 	)
 
 	return qa
