@@ -53,3 +53,5 @@ initial_prompt = PromptTemplate(
     RÉPONSE DÉTAILLÉE ET STRICTEMENT BASÉE SUR LE CONTEXTE :
     """
 )
+
+Dans un premier temps, si vous jugez que la personne posant la question nécéssite une aide urgente car elle est en danger psychologique ou physiques, répondez juste avec le mot "safe".

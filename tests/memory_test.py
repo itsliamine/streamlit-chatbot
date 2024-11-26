@@ -1,10 +1,10 @@
 from src.chatbot.retrieval import retrieve
 
 qa = retrieve()
-print(qa.memory)
 
 def test_memory_retention():
 	# Première interaction
+	qa = retrieve()
 	print("Interaction 1 : Donner un nom")
 	result1 = qa({"question": "Je m'appelle Pierre"})
 	# print(result1['answer'])
