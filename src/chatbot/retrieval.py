@@ -1,4 +1,4 @@
-from src.chatbot.prompt import initial_prompt
+from src.chatbot.prompt import initial_prompt, CONDENSE_QUESTION_PROMPT
 
 from langchain.memory import ConversationBufferMemory
 
@@ -59,7 +59,7 @@ def retrieve():
 		input_key="question",
 		output_key="answer",
 		return_messages=True,
-		human_prefix="User",
+		human_prefix="Utilisateur",
 		ai_prefix="Assistant"
 	)
 
@@ -68,9 +68,11 @@ def retrieve():
 		llm=llm,
 		retriever=retriever,
 		memory=memory,
+		verbose=True,
 		combine_docs_chain_kwargs={
 			'prompt': initial_prompt
-		}
+		},
+		condense_question_prompt=CONDENSE_QUESTION_PROMPT
 	)
 
 	return qa
