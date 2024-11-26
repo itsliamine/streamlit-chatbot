@@ -3,26 +3,15 @@ from src.chatbot.prompt import initial_prompt
 
 from langchain.memory import ConversationBufferMemory
 
-from langchain_community.llms import AzureOpenAI
-from langchain.chains import ConversationalRetrievalChain, LLMChain
+from langchain.chains import ConversationalRetrievalChain
 from src.pinecone.init import pinecone_init
 from langchain_pinecone import Pinecone
 from langchain_openai import AzureOpenAIEmbeddings, AzureChatOpenAI
-from langchain.retrievers.document_compressors import LLMChainExtractor
-from langchain.retrievers import ContextualCompressionRetriever
-
-from typing import Optional
 
 import logging
 
 from dotenv import load_dotenv
-from langchain.chains import RetrievalQA
-from langchain_community.llms import AzureOpenAI
-from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
-from langchain_pinecone import Pinecone
-
-from src.chatbot.prompt import prompt_template
-from src.pinecone.init import pinecone_init
+import os
 
 load_dotenv()
 

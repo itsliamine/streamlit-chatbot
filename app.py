@@ -1,10 +1,11 @@
 import flask
 from src.chatbot.retrieval import retrieve
-from routes import init_routes
+from api.routes import init_routes
 
 # Lance une instance flask
 app = flask.Flask(__name__)
-# Autotise le debug
+
+# Autorise le debug
 app.config["DEBUG"] = True
 
 # Initialise les routes
