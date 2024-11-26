@@ -4,8 +4,7 @@ from dotenv import load_dotenv
 from src.pinecone.init import pinecone_init
 
 def upsert_vectors(index_name, embeddings):
-	pc = pinecone_init()
-	index = pc.Index(index_name)
+	index = pinecone_init(index_name=index_name)
  
 	index.upsert(
 		vectors=embeddings
