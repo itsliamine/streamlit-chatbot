@@ -1,0 +1,155 @@
+.chatbot-container {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    padding-bottom: 9px;
+    text-align: center;
+    color: #8d0d20;
+    border-bottom: 1px solid #16151535;
+  }
+
+  .chat-container {
+    padding: 5px;
+    flex: 1;
+    overflow-y: auto; /* Allow scrolling on Y-axis */
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+
+    .message {
+      max-width: 90%;
+      display: flex;
+      gap: 10px;
+      &.bot-message {
+        padding-top: 10px;
+      }
+      &.user-message {
+        align-self: flex-end;
+
+        .texts p {
+          padding: 15px;
+
+          border-radius: 10px;
+          color: white;
+          background-color: #8d0d20;
+        }
+      }
+
+      img {
+        align-self: flex-start;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .texts {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        word-wrap: break-word; /* Allow breaking long words */
+        
+        
+        /* Ensure correct wrapping and breaking in all elements */
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li {
+          word-wrap: break-word;
+          white-space: normal;
+          overflow-wrap: break-word;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          margin: 2px 0;
+          color: #8d0d20; /* Add color for headings */
+        }
+
+        ul,
+        ol {
+          padding-left: 20px; /* Indent list items */
+        }
+
+        li {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  .input-container {
+    padding: 5px 10px;
+    padding-left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: 1px solid #16151535;
+    gap: 5px;
+    margin-top: auto;
+  
+
+    input {
+      background-color: transparent;
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 16px;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    .send-button {
+      background-color: #8d0d20;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: large;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #4b0711;
+      }
+    }
+
+    .mic-button {
+      font-size: large;
+      margin-right: 10px;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+
+      &:hover {
+        color: rgb(63, 62, 62);
+      }
+
+      &.listening {
+        color: rgb(170, 3, 3);
+
+        &:hover {
+          color: rgb(209, 4, 4);
+        }
+      }
+    }
+  }
+}
