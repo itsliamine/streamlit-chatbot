@@ -9,6 +9,7 @@ from tqdm import tqdm
 
 from src.pinecone.init import create_db
 from src.pinecone.upsert import upsert_vectors
+from src.data_preprocessing.preprocess import clean_text
 
 from langchain_openai import AzureOpenAIEmbeddings
 
@@ -17,7 +18,7 @@ load_dotenv()
 
 def generate_embeddings(input_csv):
 	df = pd.read_csv(input_csv)
-	answers_tokens = df["answers_tokens"].tolist()
+	answers = df["answers"].tolist()
 
 	embeddings_function = AzureOpenAIEmbeddings(
 		model='text-embedding-ada-002',
@@ -25,26 +26,28 @@ def generate_embeddings(input_csv):
 	)
 
 	embeddings = []
-	for idx, (answer_tokens) in enumerate(
-		tqdm(
-			answers_tokens,
-			total=len(answers_tokens),
-			desc="Embedding Progress"
-		)
+	for idx, (answers) in enumerate(
+			tqdm(
+				answers,
+				total=len(answers),
+				desc="Embedding Progress"
+			)
 	):
 		try:
-			token_embedding = embeddings_function.embed_query(" ".join(answer_tokens))
-			
-			embeddings.append((
-				f"a_{idx}",
-				token_embedding,
-				{
-					"text": df["answers"].iloc[idx],
-					"tokens": answer_tokens,
-					"type": "answer",
-					"pair_id": idx
-				}
-			))
+			lines = answers.split('\n')
+			for i in range(len(lines)):
+				line_embedding = embeddings_function.embed_query(clean_text(lines[i]))
+
+				embeddings.append((
+					f"answer_{idx}_line_{i}",
+					line_embedding,
+					{
+						"answer": df["answers"].iloc[idx],
+						"line": lines[i],
+						"type": "answer",
+						"text": df['domain'].iloc[idx]
+					}
+				))
 
 		except Exception as e:
 			logging.error(f"Error embedding row {idx}: {str(e)}")
@@ -68,8 +71,8 @@ def upload_embeddings(embeddings):
 		index_name=index_name,
 		embeddings=embeddings
 	)
- 
- 
+
+
 def upload_embeddings_step(embeds):
 	temp = []
 	i = 0

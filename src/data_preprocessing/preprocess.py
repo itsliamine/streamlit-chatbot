@@ -22,28 +22,7 @@ def clean_text(text: str) -> str:
 	text = re.sub(r"[^a-zA-Z0-9\sÀ-ÖØ-öø-ÿ]", "", text)
 	text = re.sub(r'[^\w\s.,?!-]', '', text)
 	text = re.sub(r"\s+", " ", text).strip()
-	return text.lower()
-
-def tokenize_text(text: str) -> List[str]:
-	# text = unicodedata.normalize('NFKD', text)
-	
-	# text = ''.join([c for c in text if not unicodedata.combining(c)])
-	
-	text = text.lower()
-	
-	text = re.sub(r'[^\w\s.,?!-]', '', text)
-	
-	tokens = nltk.word_tokenize(text)
-	
-	stop_words = set(stopwords.words('french'))
-	tokens = [token for token in tokens if token not in stop_words]
-	
-	lemmatizer = WordNetLemmatizer()
-	tokens = [lemmatizer.lemmatize(token) for token in tokens]
-	
-	tokens = [token for token in tokens if len(token) > 1]
-	
-	return tokens
+	return text
 
 
 def preprocess_csv(
@@ -62,15 +41,16 @@ def preprocess_csv(
 
 		df.rename(
 			columns={
-				"Réponse écrite de DP": "answers"
+				"Réponse écrite de DP": "answers",
+				"Domaine de la question de droit" : "domain"
 			},
 			inplace=True
 		)
 
-		df["answers"] = df["answers"].fillna("").apply(clean_text)
+		df["answers"] = df["answers"].fillna("")
+		df['domain'] = df['domain'].fillna('').apply(clean_text)
 		
 		logging.info("Tokenzing answers...")
-		df["answers_tokens"] = df["answers"].apply(tokenize_text)
 		df.to_csv(output_path, index=False)
 		print(f"Preprocessed data saved to {output_path}")
 
