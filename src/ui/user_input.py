@@ -8,11 +8,13 @@ def handle_user_input():
 
 		with st.spinner('Recherche de la réponse...'):
 			response = st.session_state.qa_chain.invoke({
-				"query": user_input
+				"question": user_input
 			})
 
+			print(response)
+
 			answer = response.get(
-				'result', 'Désolé, je ne peux pas répondre à cette question.')
+				'answer', 'Désolé, je ne peux pas répondre à cette question.')
 
 		with st.chat_message("assistant"):
 			st.markdown(answer)
