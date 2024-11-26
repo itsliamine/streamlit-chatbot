@@ -73,11 +73,11 @@ def upload_embeddings(embeddings):
 	)
 
 
-def upload_embeddings_step(embeds):
+def upload_embeddings_step(embeds, step):
 	temp = []
 	i = 0
 	for embed in tqdm(embeds, 'Upload embeds'):
-		if i != 10:
+		if i != step:
 			temp.append(embed)
 			i += 1
 		else:
