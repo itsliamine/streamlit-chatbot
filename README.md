@@ -1,61 +1,95 @@
-# streamlit-chatbot
+# Handie
 
-### TODO:
+Handie est un chatbot conçu pour aider les personnes en situation de handicap à obtenir des informations juridiques. Le nom "Handie" fait référence à deux concepts : le mot "handicap" et "handy" en anglais, qui signifie "utile". C'est un nom "friendly" en rapport avec le sujet.
 
-- **General Improvements**
+## Fonctionnalités
+- **Réponses juridiques** : Handie fournit des réponses aux questions juridiques.
+- **Facilité d'utilisation** : Le chatbot utilise un langage naturel et est facile à interagir avec.
+- **Reconnaissance vocale** : Il est possible de poser des questions en utilisant la voix, grâce à une fonction de reconnaissance vocale.
 
-	- *Better preprocessing*
+## Architecture
+Le projet est composé de deux parties principales :
+1. **API Flask** : Cette API gère les requêtes juridiques et renvoie des réponses traitées.
+2. **Webapp React** : L'interface utilisateur, qui permet aux utilisateurs de communiquer avec le chatbot, est construite en React.
 
-	Find ways to improve the text preprocessing.
+## Prérequis
 
-	- *RAG*
+### Pour l'API Flask (Backend)
+1. **Python 3.8+**
+2. **Flask** pour créer l'API web.
 
-	Look for another vector DB alternative that may be faster and more efficient than Pinecone.
+### Pour l'application React (Frontend)
+1. **Node.js** et **npm** pour installer les dépendances.
+2. **React** pour l'interface utilisateur.
 
-<br>
-General Improvements about the backend that can be made to improve the accuracy and efficency of results.
+## Installation
 
-<br>
-<br>
+### Backend (API Flask)
+1. Clonez le repository du backend :
 
-- **UI Interface**
+   ```bash
+	git clone https://github.com/itsliamine/streamlit-chatbot.git
+	cd handie-backend
+	```
+2. Créez un environnement virtuel et installez les dépendances :
 
-	- *API*
+	```bash
+	python -m venv venv
+	source venv/bin/activate   # Sur Windows : venv\Scripts\activate
+	pip install -r requirements.txt
+	```
+3. Lancez le serveur Flask :
 
-	Loose the Streamlit interface and create an API with Flask.
+	```bash
+	python app.py
+	```
 
-	- *Webapp*
+L'API sera disponible à l'adresse http://127.0.0.1:5000.
 
-	Use a JavaScript framework like React or Angular with TailwindCSS to build a solid User Interface (UI)
+### Frontend (Application React)
 
-<br>
-Provide a fully fonctionnal Web Application that can be shown and deployed.
+1. Pour démarrer le front end, allez dans le dossier webapp
 
-<br>
-<br>
+	```bash
+	cd webapp/
+	```
+2. Installez les dépendances :
 
-- **Accessibility**
+	```bash
+	npm install
+	```
+3. Lancez l'application React :
 
-
-
-	- *Text To Speech (TTS)*
-
-	Provide a TTS option for people with disabilities.
-
-	- *Langchain Tools*
-
-	Make the chatbot recognize some patterns in case of an emergency or a doubt so that the case can be handled directly by someone.
-
-<br>
-
-The Web Application main's focus is Accessibility. It should be able to provide solutions to people facing issues when it comes to using it.
-
-
-
-
-
-
-
+	```bash	
+	npm start
+	```
+L'application sera disponible à l'adresse http://localhost:3000.
 
 
-Réponses courtes et précises.
+### Dépendances
+## Backend (Flask)
+- Flask : Framework web léger pour créer l'API.
+- Flask-CORS : Pour gérer les requêtes cross-origin depuis l'application React.*
+
+	```bash
+	pip install Flask Flask-CORS
+	```
+## Frontend (React)
+- React : Framework JavaScript pour construire l'interface utilisateur.
+- @mui/icons-material : Pour utiliser des icônes comme celle du microphone.
+- framer-motion : Animations
+- react-markdown : Pour afficher les réponses du chatbot avec un rendu Markdown.
+
+	```bash
+	npm install @mui/icons-material react-markdown
+	```
+
+# Auteurs
+[Farès Aoudia](https://github.com/itsliamine)
+
+[Gwendal Benard](https://github.com/GwEnDoO27)
+
+[Anass El Karoumi](https://github.com/Anasskm)
+
+# Licence
+Ce projet est sous licence MIT. Vous pouvez librement utiliser et modifier le code, mais veuillez inclure cette licence dans toute copie du projet.
