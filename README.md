@@ -1,61 +1,26 @@
-# streamlit-chatbot
+# Handie
 
-### TODO:
+Handie est un chatbot amical et utile, alliant inclusivité (« handicap ») et praticité (« handy » en anglais). Conçu pour être accessible, il offre soutien et conseils avec bienveillance.
 
-- **General Improvements**
+## Comment le lancer ?
 
-	- *Better preprocessing*
+[Python 3.10](https://www.python.org/downloads/release/python-31015/) a été utilisé pour ce projet.
 
-	Find ways to improve the text preprocessing.
+### Librairies
 
-	- *RAG*
+Toutes les librairies utilisées sont situées dans le fichier `requirements.txt`. Il faut les installer avant de lancer Handie avec cette commande :
 
-	Look for another vector DB alternative that may be faster and more efficient than Pinecone.
+`pip install -r requirements.txt`
 
-<br>
-General Improvements about the backend that can be made to improve the accuracy and efficency of results.
+Une fois les librairies installées, Handie est prêt à l'emploi ! Il suffit de le démarrer comme ceci:
 
-<br>
-<br>
+### Démarrage
 
-- **UI Interface**
+`python app.py`
 
-	- *API*
+Par défaut, le bot est lancé sur le port 5000.
 
-	Loose the Streamlit interface and create an API with Flask.
+### Interface
 
-	- *Webapp*
+Une interface web est intégré à ce projet pour le tester plus facilement.
 
-	Use a JavaScript framework like React or Angular with TailwindCSS to build a solid User Interface (UI)
-
-<br>
-Provide a fully fonctionnal Web Application that can be shown and deployed.
-
-<br>
-<br>
-
-- **Accessibility**
-
-
-
-	- *Text To Speech (TTS)*
-
-	Provide a TTS option for people with disabilities.
-
-	- *Langchain Tools*
-
-	Make the chatbot recognize some patterns in case of an emergency or a doubt so that the case can be handled directly by someone.
-
-<br>
-
-The Web Application main's focus is Accessibility. It should be able to provide solutions to people facing issues when it comes to using it.
-
-
-
-
-
-
-
-
-
-Réponses courtes et précises.
